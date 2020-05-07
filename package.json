@@ -1,0 +1,34 @@
+{
+  "name": "openmoji-picker",
+  "version": "0.0.0",
+  "description": "An efficient OpenMoji emoji picker",
+  "keywords": [
+    "sprite",
+    "spritesheet",
+    "emoji",
+    "emoji-picker",
+    "unicode",
+    "openmoji"
+  ],
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/axelpale/openmoji-picker.git"
+  },
+  "scripts": {
+    "lint": "standard '**/*.js' && echo OK",
+    "lintfix": "standard --fix '**/*.js' && echo OK",
+    "test": "npm run lint"
+  },
+  "author": {
+    "name": "Akseli Palén",
+    "email": "akseli.palen@gmail.com"
+  },
+  "license": "CC-BY-SA-4.0",
+  "devDependencies": {
+    "standard": "*"
+  },
+  "dependencies": {
+    "openmoji-sprites": "^2.0.0"
+  }
+}

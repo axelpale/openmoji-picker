@@ -1,8 +1,11 @@
 const omSprites = require('openmoji-sprites')
 
 const groups = omSprites.includeGroups.map(groupName => {
-  return Object.assign({}, omSprites.groups[groupName], {
-    name: groupName
+  const group = omSprites.groups[groupName]
+  return Object.assign({}, group, {
+    name: groupName,
+    images: group.sheets.map(sheet => require(sheet.files.png.png)),
+    styles: group.sheets.map(sheet => require(sheet.files.png.css))
   })
 })
 
@@ -27,32 +30,51 @@ exports.create = (onEmoji) => {
   groups.forEach(group => {
     const tabEl = document.createElement('div')
     tabEl.innerHTML = group.icon
+    tabEl.dataset.groupName = group.name
     tabsEl.appendChild(tabEl)
   })
 
-  // Create sheet
-  const sheetEl = document.createElement('div')
-  viewEl.appendChild(sheetEl)
+  const selectGroup = (groupName) => {
+    // Create new sheet
+    const sheetEl = document.createElement('div')
+    viewEl.appendChild(sheetEl)
 
-  // Default group smileys
-  let selectedGroup = omSprites.groups['smileys-emotion']
+    // Remove possible old sheet
+    if (viewEl.children.length > 1) {
+      viewEl.removeChild(viewEl.firstChild)
+    }
 
-  // Create emojis
-  selectedGroup.sheets.forEach(sheet => {
-    sheet.hexcodes.forEach(hexcode => {
-      const emojiEl = document.createElement('span')
-      emojiEl.className = 'openmoji openmoji-1F435'
-      emojiEl.dataset.hexcode = hexcode
-      sheetEl.appendChild(emojiEl)
+    // Default group smileys
+    let selectedGroup = omSprites.groups[groupName]
+
+    // Create emojis for the selected group
+    selectedGroup.sheets.forEach(sheet => {
+      sheet.hexcodes.forEach(hexcode => {
+        const emojiEl = document.createElement('span')
+        emojiEl.className = 'openmoji openmoji-' + hexcode
+        emojiEl.dataset.hexcode = hexcode
+        sheetEl.appendChild(emojiEl)
+      })
     })
-  })
 
-  // Define input
-  sheetEl.addEventListener('click', ev => {
-    onEmoji({
-      emoji: 'TODO',
-      hexcode: ev.target.dataset.hexcode)
+    // Define emoji input
+    sheetEl.addEventListener('click', ev => {
+      onEmoji({
+        emoji: 'TODO',
+        hexcode: ev.target.dataset.hexcode
+      })
     })
+  }
+
+  // Default group
+  selectGroup('smileys-emotion')
+
+  // Define tab input
+  tabsEl.addEventListener('click', ev => {
+    const groupName = ev.target.dataset.groupName
+    if (groupName) {
+      selectGroup(groupName)
+    }
   })
 
   return root

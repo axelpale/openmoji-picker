@@ -1,11 +1,11 @@
 const omSprites = require('openmoji-sprites')
+// import animalsNature from 'openmoji-sprites/docs/png/animals-nature-00.png'
+const resolve = require.context('openmoji-sprites/docs/png')
 
 const groups = omSprites.includeGroups.map(groupName => {
   const group = omSprites.groups[groupName]
   return Object.assign({}, group, {
-    name: groupName,
-    images: group.sheets.map(sheet => require(sheet.files.png.png)),
-    styles: group.sheets.map(sheet => require(sheet.files.png.css))
+    name: groupName
   })
 })
 
@@ -29,32 +29,37 @@ exports.create = (onEmoji) => {
   // Create tabs
   groups.forEach(group => {
     const tabEl = document.createElement('div')
+    tabEl.className = 'om-picker-tab'
     tabEl.innerHTML = group.icon
     tabEl.dataset.groupName = group.name
     tabsEl.appendChild(tabEl)
   })
 
   const selectGroup = (groupName) => {
+    // Remove possible old sheets
+    while (viewEl.firstChild) {
+      viewEl.removeChild(viewEl.firstChild)
+    }
+
     // Create new sheet
     const sheetEl = document.createElement('div')
     viewEl.appendChild(sheetEl)
 
-    // Remove possible old sheet
-    if (viewEl.children.length > 1) {
-      viewEl.removeChild(viewEl.firstChild)
-    }
-
     // Default group smileys
-    let selectedGroup = omSprites.groups[groupName]
+    const selectedGroup = omSprites.groups[groupName]
 
-    // Create emojis for the selected group
     selectedGroup.sheets.forEach(sheet => {
+      // Create emojis for the selected group
       sheet.hexcodes.forEach(hexcode => {
         const emojiEl = document.createElement('span')
         emojiEl.className = 'openmoji openmoji-' + hexcode
         emojiEl.dataset.hexcode = hexcode
         sheetEl.appendChild(emojiEl)
       })
+      // Import positions dynamically
+      // TODO ensure same styles are not inserted multiple times
+      const sheetName = groupName + sheet.postfix
+      resolve('./' + sheetName + '.css')
     })
 
     // Define emoji input

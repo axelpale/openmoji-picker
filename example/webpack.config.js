@@ -14,16 +14,16 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader?url=false']
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.(png|svg)$/i,
         loader: 'file-loader',
         options: {
-          name: '[path][name].[ext]'
+          name: 'sheet/[name].[ext]'
         }
       }
-    ],
+    ]
   },
   mode: 'production', // in {development, production}
   devtool: 'source-map'

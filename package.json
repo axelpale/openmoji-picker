@@ -29,6 +29,6 @@
     "standard": "*"
   },
   "dependencies": {
-    "openmoji-sprites": "^2.1.1"
+    "openmoji-sprites": "^2.2.0"
   }
 }

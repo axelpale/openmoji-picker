@@ -69,9 +69,10 @@ exports.create = (onEmoji) => {
 
     // Define emoji input
     sheetEl.addEventListener('click', ev => {
+      const hexcode = ev.target.dataset.hexcode
       onEmoji({
-        emoji: 'TODO',
-        hexcode: ev.target.dataset.hexcode
+        emoji: String.fromCodePoint('0x' + hexcode),
+        hexcode: hexcode
       })
     })
   }

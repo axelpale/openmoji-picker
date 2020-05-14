@@ -1,7 +1,7 @@
 const omSprites = require('openmoji-sprites')
-// import animalsNature from 'openmoji-sprites/docs/png/animals-nature-00.png'
 const resolve = require.context('openmoji-sprites/docs/png')
 
+// Preprocess
 const groups = omSprites.includeGroups.map(groupName => {
   const group = omSprites.groups[groupName]
   return Object.assign({}, group, {
@@ -38,7 +38,8 @@ exports.create = (onEmoji) => {
   })
 
   const selectGroup = (groupName) => {
-    // Remove possible old sheets
+    // DEBUG console.log('select group:', groupName)
+    // Remove possible old sheets.
     while (viewEl.firstChild) {
       viewEl.removeChild(viewEl.firstChild)
     }
@@ -48,10 +49,11 @@ exports.create = (onEmoji) => {
     sheetEl.className = 'om-picker-sheet'
     viewEl.appendChild(sheetEl)
 
-    // Default group smileys
+    // Emoji group
     const selectedGroup = omSprites.groups[groupName]
 
     selectedGroup.sheets.forEach(sheet => {
+      // DEBUG console.log('select sheet:', groupName + sheet.postfix)
       // Create emojis for the selected group
       sheet.hexcodes.forEach(hexcode => {
         const emojiEl = document.createElement('span')

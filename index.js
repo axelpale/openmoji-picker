@@ -4,6 +4,15 @@ const resolve = require.context('openmoji-sprites/docs/png', true, /\.(png|css)$
 // Preprocess
 const groups = omSprites.includeGroups.map(groupName => {
   const group = omSprites.groups[groupName]
+
+  // Import css sprites.
+  // PNGs are included with file-loader.
+  group.sheets.forEach(sheet => {
+    // NOTE class .openmoji will be inserted multiple times. Simple but excess.
+    const sheetName = groupName + sheet.postfix
+    resolve('./' + sheetName + '.css')
+  })
+
   return Object.assign({}, group, {
     name: groupName
   })
@@ -55,16 +64,15 @@ exports.create = (onEmoji) => {
     selectedGroup.sheets.forEach(sheet => {
       // DEBUG console.log('select sheet:', groupName + sheet.postfix)
       // Create emojis for the selected group
-      sheet.hexcodes.forEach(hexcode => {
+      const emojiEls = sheet.hexcodes.map(hexcode => {
         const emojiEl = document.createElement('span')
         emojiEl.className = 'openmoji openmoji-' + hexcode
         emojiEl.dataset.hexcode = hexcode
+        return emojiEl
+      })
+      emojiEls.forEach(emojiEl => {
         sheetEl.appendChild(emojiEl)
       })
-      // Import positions dynamically
-      // TODO ensure same styles are not inserted multiple times
-      const sheetName = groupName + sheet.postfix
-      resolve('./' + sheetName + '.css')
     })
 
     // Define emoji input

@@ -20,10 +20,12 @@ exports.create = (onEmoji) => {
 
   // Create container for tabs
   const tabsEl = document.createElement('div')
+  tabsEl.className = 'om-picker-tabs'
   root.appendChild(tabsEl)
 
   // Create container for sheet view
   const viewEl = document.createElement('div')
+  viewEl.className = 'om-picker-view'
   root.appendChild(viewEl)
 
   // Create tabs
@@ -43,6 +45,7 @@ exports.create = (onEmoji) => {
 
     // Create new sheet
     const sheetEl = document.createElement('div')
+    sheetEl.className = 'om-picker-sheet'
     viewEl.appendChild(sheetEl)
 
     // Default group smileys

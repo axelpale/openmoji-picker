@@ -42,6 +42,8 @@ exports.create = (onEmoji) => {
     const tabEl = document.createElement('div')
     tabEl.className = 'om-picker-tab'
     tabEl.innerHTML = group.icon
+    // TODO tabEl.innerHTML = '<span class="openmoji openmoji-' + group.iconHexcode + '"></span>'
+
     tabEl.dataset.groupName = group.name
     tabsEl.appendChild(tabEl)
   })

@@ -8,7 +8,8 @@
     "url": "git://github.com/axelpale/openmoji-picker.git"
   },
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "watchbuild": "webpack --watch"
   },
   "author": {
     "name": "Akseli Palén",

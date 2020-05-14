@@ -1,5 +1,5 @@
 const omSprites = require('openmoji-sprites')
-const resolve = require.context('openmoji-sprites/docs/png')
+const resolve = require.context('openmoji-sprites/docs/png', true, /\.(png|css)$/i)
 
 // Preprocess
 const groups = omSprites.includeGroups.map(groupName => {

@@ -23,9 +23,7 @@ exports.create = (onEmoji) => {
 
   // Create container
   const root = document.createElement('div')
-  root.style.position = 'relative'
-  root.style.width = '600px'
-  root.style.height = '400px'
+  root.className = 'om-picker'
 
   // Create container for tabs
   const tabsEl = document.createElement('div')

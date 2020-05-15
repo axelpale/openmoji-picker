@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "watchbuild": "webpack --watch"
+    "watchbuild": "nodemon --watch ../ --ext js,ejs,css,html --ignore dist --exec \"npm run build\""
   },
   "author": {
     "name": "Akseli Palén",
@@ -20,6 +20,7 @@
     "css-loader": "^3.2.0",
     "ejs-loader": "^0.3.3",
     "file-loader": "^6.0.0",
+    "nodemon": "^2.0.4",
     "style-loader": "^1.0.0",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.7"

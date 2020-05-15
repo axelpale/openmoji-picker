@@ -1,5 +1,6 @@
 const openmojiPicker = require('../index')
 require('../light-theme.css')
+require('./style.css')
 require('file-loader?name=[name].[ext]!./favicon.ico')
 require('file-loader?name=[name].[ext]!./index.html')
 

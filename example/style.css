@@ -1,0 +1,12 @@
+.container {
+  background-color: gray;
+}
+
+.input-container {
+  padding: 0.38em;
+}
+.input-container input {
+  font-size: 1.6em;
+  height: 1em;
+  min-width: 50%;
+}

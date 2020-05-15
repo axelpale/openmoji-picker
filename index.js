@@ -1,5 +1,5 @@
-const omSprites = require('openmoji-sprites')
-const resolve = require.context('openmoji-sprites/docs/png', true, /\.(png|css)$/i)
+const omSprites = require('../openmoji-sprites')
+const resolve = require.context('../openmoji-sprites/docs/png72', true, /\.(png|css)$/i)
 
 // Preprocess
 const groups = omSprites.includeGroups.map(groupName => {
@@ -13,9 +13,7 @@ const groups = omSprites.includeGroups.map(groupName => {
     resolve('./' + sheetName + '.css')
   })
 
-  return Object.assign({}, group, {
-    name: groupName
-  })
+  return group
 })
 
 exports.create = (onEmoji) => {
@@ -37,11 +35,8 @@ exports.create = (onEmoji) => {
 
   // Create tabs
   groups.forEach(group => {
-    const tabEl = document.createElement('div')
-    tabEl.className = 'om-picker-tab'
-    tabEl.innerHTML = group.icon
-    // TODO tabEl.innerHTML = '<span class="openmoji openmoji-' + group.iconHexcode + '"></span>'
-
+    const tabEl = document.createElement('span')
+    tabEl.className = 'om-picker-tab openmoji openmoji-' + group.icon.hexcode
     tabEl.dataset.groupName = group.name
     tabsEl.appendChild(tabEl)
   })
@@ -91,6 +86,7 @@ exports.create = (onEmoji) => {
   // Define tab input
   tabsEl.addEventListener('click', ev => {
     const groupName = ev.target.dataset.groupName
+    console.log('tab clicked:', groupName)
     if (groupName) {
       selectGroup(groupName)
     }

@@ -1,3 +1,11 @@
+.om-picker {
+  background-color: lightgray;
+}
+
+.om-picker-tabs {
+  border-bottom: 1px solid gray;
+}
+
 .om-picker-tab {
   display: inline-block;
   cursor: pointer;

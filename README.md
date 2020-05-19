@@ -1,4 +1,4 @@
-# openmoji-picker
+# openmoji-picker (alpha)
 
 An efficient emoji picker for web developers.
 

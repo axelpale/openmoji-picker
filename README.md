@@ -10,3 +10,5 @@ An efficient emoji picker for web developers.
     })
 
     document.body.appendChild(picker)
+
+![](example/screenshot.jpg)
